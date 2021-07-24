@@ -18,6 +18,8 @@
 *.txt 
 *.bat
 
+/config/**.*.json
+
 # images
 # JPEG
 *.jpg
