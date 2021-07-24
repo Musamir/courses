@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "coursestj.herokuapp.com",
+    "host": "localhost:8085",
     "basePath": "/",
     "paths": {
         "/auth/sign-in": {

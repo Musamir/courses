@@ -25,7 +25,7 @@ definitions:
         description: password - user password (required, not null)
         type: string
     type: object
-host: coursestj.herokuapp.com
+host: localhost:8085
 info:
   contact: {}
   description: This is a simple course management system
