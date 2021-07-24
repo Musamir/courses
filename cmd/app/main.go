@@ -9,7 +9,7 @@ import (
 // @version 1.0
 // @description This is a simple course management system
 
-// @host localhost:8085
+// @host coursestj.herokuapp.com
 // @BasePath /
 
 // @securityDefinitions.apikey ApiKeyAuth
