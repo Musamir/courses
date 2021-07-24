@@ -1,0 +1,139 @@
+basePath: /
+definitions:
+  http.changePasswordRequest:
+    properties:
+      newpassword:
+        type: string
+      oldpassword:
+        type: string
+    type: object
+  http.signInResponse:
+    properties:
+      id:
+        description: Id - user id
+        type: integer
+      token:
+        description: token - generated new token for the user
+        type: string
+    type: object
+  http.signRequest:
+    properties:
+      login:
+        description: login - user login (required, not null)
+        type: string
+      password:
+        description: password - user password (required, not null)
+        type: string
+    type: object
+host: localhost:8085
+info:
+  contact: {}
+  description: This is a simple course management system
+  title: Courses - Course management system
+  version: "1.0"
+paths:
+  /auth/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: signIn checks the users login and password and returns token if
+        the user exists
+      parameters:
+      - description: account info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/http.signRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/http.signInResponse'
+        "400":
+          description: Incorrect login or password
+          schema:
+            type: string
+        "401":
+          description: Unauthorized!!
+          schema:
+            type: string
+        "500":
+          description: Oops something went wrong(( Sorry, please try again later
+          schema:
+            type: string
+      summary: signIn
+      tags:
+      - auth
+  /safe/auth/changePassword:
+    put:
+      consumes:
+      - application/json
+      description: ChangePassword changed user password
+      parameters:
+      - description: change pass struct
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/http.changePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            type: string
+        "400":
+          description: incorrectPassword or the id doesn't exist
+          schema:
+            type: string
+        "401":
+          description: Unauthorized!!
+          schema:
+            type: string
+        "500":
+          description: Oops something went wrong
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: ChangePassword
+      tags:
+      - safe
+  /safe/business/test:
+    get:
+      description: test is used to test your jwt token. It return "hello" if your
+        token is suitable
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: hello
+          schema:
+            type: string
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: Unauthorized!!
+          schema:
+            type: string
+        "500":
+          description: something went wrong
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: test
+      tags:
+      - safe
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
