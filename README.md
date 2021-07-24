@@ -19,7 +19,9 @@ This is a simple course management system.
 
 1. You need to install [Go](https://golang.org/) compiler(version 1.13+ is required) and set your Go environment.
 
-2. Open your command line in the program folder and use the below Go command to run the program.
+2. Set your environment variables Courses_DATABASE_URL(postgres url), PORT(port for http) or specify them in the configuration file config/conf.json
+
+3. Open your command line in the program folder and use the below Go command to run the program.
 
 ```sh
 $ go run cmd/app/main.go

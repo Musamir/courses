@@ -40,11 +40,11 @@ func Run(confpath string) error {
 		return err
 	}
 	// urlExample := "postgres://username:password@localhost:5432/database_name"
-	dburl := fmt.Sprintf("%s://%s:%s@%s:%s/%s", conf.Database.DBMS, conf.Database.Username, conf.Database.Password, conf.Database.Host, conf.Database.Port, conf.Database.Dbname)
 
-	// dburl = ""
-	// dburl = os.Getenv("DATABASE_URL")
-	// strings.Split(dburl, ":")
+	dburl := os.Getenv("Courses_DATABASE_URL")
+	if dburl == "" {
+		dburl = fmt.Sprintf("%s://%s:%s@%s:%s/%s", conf.Database.DBMS, conf.Database.Username, conf.Database.Password, conf.Database.Host, conf.Database.Port, conf.Database.Dbname)
+	}
 
 	fmt.Println("db url = ", dburl)
 
@@ -64,10 +64,10 @@ func Run(confpath string) error {
 
 	rout.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	// port := os.Getenv("PORT")
-	port := conf.Http.Port
+	port := os.Getenv("PORT")
+
 	if port == "" {
-		port = "3000"
+		port = conf.Http.Port
 	}
 
 	// conf.Http.Port = ":" + port
